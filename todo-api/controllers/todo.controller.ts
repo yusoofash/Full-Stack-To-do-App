@@ -3,8 +3,8 @@ import todoService from '../services/todo.service';
 
 const postTodo = async (req: Request, res: Response, next: NextFunction) => {
     try {
-        await todoService.insertTodo(req.body);
-        res.sendStatus(204);
+        const savedTodo = await todoService.insertTodo(req.body);
+        res.json(savedTodo);
     } catch (err) {
         next(err);
     }

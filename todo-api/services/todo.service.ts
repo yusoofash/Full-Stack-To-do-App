@@ -10,7 +10,7 @@ const insertTodo = async (data: PostTodoRequest) => {
 
     const todo = new Todo;
     todo.text = data.text;
-    await todo.save();
+    return await todo.save();
 };
 
 const updateTodo = async (data: PutTodoRequest) => {
