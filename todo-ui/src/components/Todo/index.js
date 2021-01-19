@@ -37,20 +37,26 @@ const Todo = () => {
     };
 
     const updateTask = (index, title) => {
-        const newTasks = tasks.map((task) => {
-            if (task._id === index) {
-                return { ...task, title };
-            }
-            return task;
-        });
-
-        axios.put(`${endpoint}/${index}`, {
-            text: title
-        })
-            .then(() => {
-                setTasks(newTasks);
+        if (!title) {
+            // delete
+            removeTask(index);
+        } else {
+            // update
+            const newTasks = tasks.map((task) => {
+                if (task._id === index) {
+                    return { ...task, title };
+                }
+                return task;
+            });
+    
+            axios.put(`${endpoint}/${index}`, {
+                text: title
             })
-            .catch(alert);
+                .then(() => {
+                    setTasks(newTasks);
+                })
+                .catch(alert);
+        }
     };
 
     const removeTask = index => {
